@@ -8,7 +8,16 @@
 import scrapy
 
 
-class Dy1234Item(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+# class Dy1234Item(scrapy.Item):
+#     # define the fields for your item here like:
+#     # name = scrapy.Field()
+#     pass
+
+class urlItem(scrapy.Item):
+    url = scrapy.Field()
+    description = scrapy.Field()
+
+
+class TorrentItem(scrapy.Item):
+    title = scrapy.Field()
+    link = scrapy.Field()
