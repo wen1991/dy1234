@@ -91,4 +91,8 @@ DOWNLOADER_MIDDLEWARES = {
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-DEPTH_LIMIT = 1
+DEPTH_LIMIT = 20
+
+# log level
+LOG_LEVEL = 'INFO'
+# LOG_LEVEL = 'DEBUG'
