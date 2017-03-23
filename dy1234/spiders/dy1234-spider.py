@@ -46,7 +46,7 @@ class DY1234Spider(scrapy.Spider):
         urls = []
         for i in range(1, 620):
             url = 'http://www.idyjy.com/w.asp?p=' + str(i) + '&f=3&l=s'
-            self.log('[start_requests]%s' % url)
+            # self.logger.info('[start_requests]%s' % url)
             urls.append(url)
         for url in urls:
             yield scrapy.Request(url=url, callback=self.parse)
@@ -58,10 +58,17 @@ class DY1234Spider(scrapy.Spider):
         for img in imgs:
             # self.log('[parse]:%s' % img.xpath('@href').extract()[0])
             url = self.domain + img.xpath('@href').extract()[0]
-            self.log('[parse]:%s' % url)
+            # self.logger.info('[parse]:%s', url)
             yield scrapy.Request(url=url, callback=self.parse_torrent)
 
     def parse_torrent(self, response):
+        self.id_num = self.id_num + 1
+        tt = urlItem()
+        tt['ID'] = filter(str.isdigit, response.url)
+        tt['url'] = response.url
+        tt['description'] = response.xpath(
+            "//h1/span[@id='name']/text()").extract()
+        yield tt
         for tt in response.xpath("//ul/li/input[@class='down_url']"):
             torrent = TorrentItem()
             torrent['title'] = tt.xpath('@file_name').extract()

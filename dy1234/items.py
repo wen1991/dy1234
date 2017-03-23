@@ -14,6 +14,7 @@ import scrapy
 #     pass
 
 class urlItem(scrapy.Item):
+    ID = scrapy.Field()
     url = scrapy.Field()
     description = scrapy.Field()
 
